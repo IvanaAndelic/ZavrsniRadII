@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace AlgebraicExpressionInterpreter
 {
-    public class Class1
+    public class Context
     {
+        public double X { get; private set; }
+
+        public Context(double x)
+        {
+            X = x;
+        }
     }
 }

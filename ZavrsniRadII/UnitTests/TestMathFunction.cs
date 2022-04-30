@@ -42,7 +42,23 @@ namespace UnitTests
             Assert.AreEqual(-1.0, mathFun.Interpret(new Context(Math.PI)));
         }
 
-        
+        [TestMethod]
+        void MathFunctionOfCosReturns0ForPiHalfConstant()
+        {
+            IExpression piHalf = new Constant(Math.PI);
+            IExpression mathFun = new MathFunction(Math.Cos, piHalf);
+            Assert.AreEqual(0, mathFun.Interpret(new Context(Math.PI)));
+        }
+
+        [TestMethod]
+        void MathFunctionOfCosReturns1ForZeroConstant() 
+        {
+            IExpression zero = new Constant(0);
+            IExpression mathFun = new MathFunction(Math.Cos, zero);
+            Assert.AreEqual(1, mathFun.Interpret(new Context(0)));
+        }
+
+
 
 
     }

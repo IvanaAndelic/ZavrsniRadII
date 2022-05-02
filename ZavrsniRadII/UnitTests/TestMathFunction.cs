@@ -14,6 +14,14 @@ namespace UnitTests
             IExpression mathFun = new MathFunction(Math.Sin, piHalf);
             Assert.AreEqual(1.0, mathFun.Interpret(new Context(3)), 1e-5);
         }
+        [TestMethod]
+        public void MathFunctionOfSinReturns0ForPiConstant()
+        {
+            IExpression pi = new Constant(Math.PI);
+            IExpression mathFun = new MathFunction(Math.Sin, pi);
+            Assert.AreEqual(0, mathFun.Interpret(new Context(Math.PI)));
+        }
+
 
         [TestMethod]
         public void MathFunctionOfSqrtReturnsCorrectValueFor2()
@@ -35,7 +43,7 @@ namespace UnitTests
 
         [TestMethod]
 
-        void MathFunctionOfCosReturnsMinus1ForPiConstant()
+       public void MathFunctionOfCosReturnsMinus1ForPiConstant()
         {
             IExpression pi = new Constant(Math.PI);
             IExpression mathFun = new MathFunction(Math.Cos, pi);
@@ -43,7 +51,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        void MathFunctionOfCosReturns0ForPiHalfConstant()
+       public void MathFunctionOfCosReturns0ForPiHalfConstant()
         {
             IExpression piHalf = new Constant(Math.PI);
             IExpression mathFun = new MathFunction(Math.Cos, piHalf);
@@ -51,15 +59,24 @@ namespace UnitTests
         }
 
         [TestMethod]
-        void MathFunctionOfCosReturns1ForZeroConstant() 
+       public void MathFunctionOfCosReturns1ForZeroConstant() 
         {
             IExpression zero = new Constant(0);
             IExpression mathFun = new MathFunction(Math.Cos, zero);
             Assert.AreEqual(1, mathFun.Interpret(new Context(0)));
         }
 
-
-
+        [TestMethod]
+        public void MathFunctionCosOfSqrtReturnsCorrectValueFor2()
+        {
+            IExpression x = new VariableX();
+            IExpression xPlus2 = new SumExpression(x, new Constant(2));
+            IExpression sqrtFun = new MathFunction(Math.Sqrt, xPlus2);
+            IExpression cosFun = new MathFunction(Math.Cos, sqrtFun);
+            Assert.AreEqual(Math.Sqrt(2), cosFun.Interpret(new Context(2)));
+        }
 
     }
+
 }
+

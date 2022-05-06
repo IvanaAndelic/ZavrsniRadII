@@ -31,6 +31,7 @@ namespace UnitTests
 
             Context context = new Context(3);
             Assert.AreEqual(5, sum.Interpret(context));
+            Assert.AreEqual(7, sum.Interpret(new Context(5)));
 
         }
 
@@ -43,6 +44,22 @@ namespace UnitTests
 
             Context context = new Context(4);
             Assert.AreEqual(8, sum.Interpret(context));
+        }
+
+        [TestMethod]
+        public void SumExpressionInterpretForTwoVariablesReturnsTheirSum2()
+        {
+            IExpression first = new VariableX();
+            IExpression second = new Constant(2);
+            IExpression third = new Constant(5);
+            
+            
+
+            SumExpression sum = new SumExpression(second, third);
+            MultiplyExpression multi = new MultiplyExpression(first, sum);
+
+            Context context = new Context(4);
+            Assert.AreEqual(28, multi.Interpret(context));
         }
 
     }
